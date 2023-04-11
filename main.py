@@ -1,4 +1,8 @@
-from config import DATA_PATH, LANGUAGE
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from config import DATA_PATH, LANGUAGE, GAME_URL, TIMEOUT, USERNAME, PRIVATE
 
 ALPHABET = "abcdefghijlmnopqrstuv"
 remaining_letters = set(ALPHABET)
@@ -35,4 +39,52 @@ def get_word(syllable: str) -> str:
     words.remove(result)
     return result
 
-print(get_word("ync"))
+def create_lobby() -> str:
+    # Open web page
+    driver = webdriver.Firefox()
+    driver.implicitly_wait(TIMEOUT)
+    driver.get(GAME_URL)
+    
+    # Set nickname
+    name_button = WebDriverWait(driver, TIMEOUT).until(EC.element_to_be_clickable((By.XPATH, "//button[@class='auth']")))
+    name_button.click()
+    name_input = WebDriverWait(driver, TIMEOUT).until(EC.element_to_be_clickable((By.XPATH, "//input[@class='styled nickname']")))
+    name_input.clear()
+    name_input.send_keys(USERNAME)
+    
+    # Confirm nickname
+    ok_button = driver.find_element(By.XPATH, "//button[@class='styled']")
+    ok_button.click()
+    
+    # Set privacy
+    if PRIVATE:
+        privacy_button = WebDriverWait(driver, TIMEOUT).until(EC.element_to_be_clickable((By.XPATH, "//label[@for='roomPrivacyPrivate']")))
+    else:
+        privacy_button = WebDriverWait(driver, TIMEOUT).until(EC.element_to_be_clickable((By.XPATH, "//label[@for='roomPrivacyPublic']")))
+    privacy_button.click()
+    
+    # Select BombParty
+    bombparty_button = WebDriverWait(driver, TIMEOUT).until(EC.element_to_be_clickable((By.XPATH, "//label[@for='gameRadio-bombparty']")))
+    bombparty_button.click()
+    
+    # Create lobby
+    play_button = WebDriverWait(driver, TIMEOUT).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-text='play']")))
+    play_button.click()
+
+def join_lobby(code: str):
+    # Open web page
+    url = GAME_URL + code
+    driver = webdriver.Firefox()
+    driver.implicitly_wait(TIMEOUT)
+    driver.get(url)
+    
+    # Choose nickname
+    name_input = WebDriverWait(driver, TIMEOUT).until(EC.element_to_be_clickable((By.XPATH, "//input[@class='styled nickname']")))
+    name_input.clear()
+    name_input.send_keys(USERNAME)
+    
+    # Confirm nickname
+    ok_button = driver.find_element(By.XPATH, "//button[@class='styled']")
+    ok_button.click()
+    
+create_lobby()
