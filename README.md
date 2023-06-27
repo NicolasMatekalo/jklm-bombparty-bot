@@ -12,10 +12,10 @@ Unlike existing solutions, this bot does not rely on graphical coordinates to lo
 Instead, it uses the Selenium package and the HTML code of the page to locate and interact with these elements.
 Obviously, if the HTML code of the website is modified, the bot will be broken. Nevertheless, it is a practical solution that requires no preparation to operate.
 
-# Languages
-By default, the supported languages are the ones in the "data" folder. Feel free to add your own word list. To that end, you must create a ".txt" file with one word per row. The name of that file should be of the format "<LANGUAGE>_words.txt". Do not forget to modify the "LANGUAGE" parameter in the configuration file accordingly.
+## Languages
+By default, the supported languages are the ones in the "data" folder. Feel free to add your own word list. To that end, you must create a ".txt" file with one word per row. The name of that file should be of the format "\<LANGUAGE\>_words.txt". Do not forget to modify the "LANGUAGE" parameter in the configuration file accordingly.
 
-# Configuration
+## Configuration
 To play the game, you can either create a new lobby or join an existing one. This is controlled by the "CREATE" parameter in the configuration file ('True' to create a lobby, 'False' to join one).
 
 - If you want to create a new lobby, you must also specify whether this lobby will be public or private. This is controlled by the "PRIVATE" parameter in the configuration file ("True" to create a private lobby, "False" to create a public one).
