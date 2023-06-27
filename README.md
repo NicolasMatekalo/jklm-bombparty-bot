@@ -13,7 +13,7 @@ Instead, it uses the Selenium package and the HTML code of the page to locate an
 Obviously, if the HTML code of the website is modified, the bot will be broken. Nevertheless, it is a practical solution that requires no preparation to operate.
 
 ## Languages
-By default, the supported languages are the ones in the "data" folder. Feel free to add your own word list. 
+By default, the supported languages are the ones in the "data" folder. Feel free to add your own word list.  
 To that end, you must create a ".txt" file with one word per row. The name of that file should be of the format "\<LANGUAGE\>_words.txt". Do not forget to modify the "LANGUAGE" parameter in the configuration file accordingly.
 
 ## Configuration
