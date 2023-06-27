@@ -8,4 +8,6 @@ GAME_URL = "https://jklm.fun/"
 TIMEOUT = 10
 USERNAME = "BombParty-Bot"
 
+ROOM_CODE = "QARV"
+CREATE = True
 PRIVATE = True
