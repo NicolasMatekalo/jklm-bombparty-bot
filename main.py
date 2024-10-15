@@ -44,6 +44,9 @@ def create_lobby(driver):
     # Open web page
     driver.get(GAME_URL)
     
+    # Wait for page to load
+    time.sleep(2)
+    
     # Set nickname
     name_button = get_clickable_element(driver, "//button[@class='auth']")
     name_button.click()
@@ -52,7 +55,7 @@ def create_lobby(driver):
     name_input.send_keys(USERNAME)
     
     # Confirm nickname
-    ok_button = get_clickable_element(driver, "//button[@class='styled']")
+    ok_button = get_clickable_element(driver, "//button[@data-text='ok']")
     ok_button.click()
     
     # Set privacy
@@ -99,7 +102,7 @@ else:
     join_lobby(driver, ROOM_CODE)
 
 # Switch to the correct iframe
-iframe = driver.find_element(By.XPATH, "//iframe[@src='https://falcon.jklm.fun/games/bombparty']")
+iframe = driver.find_element(By.XPATH, "//iframe[@src='https://phoenix.jklm.fun/games/bombparty']")
 driver.switch_to.frame(iframe)
 
 # Join game
